@@ -1,3 +1,3 @@
-import './scss/style.scss';
+import "./scss/style.scss";
 
-import './modules/onestep';
+import "./modules/generatorQR";

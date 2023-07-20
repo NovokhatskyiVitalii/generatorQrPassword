@@ -1,5 +1,18 @@
-$bg-color: pink;
-
 body {
- background: $bg-color;
+    position: relative;
+    min-height: 100vh;
+    background-color: $white;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 900px;
+    min-height: 450px;
+    background-color: $white2;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid $violet;
 }
