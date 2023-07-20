@@ -76,14 +76,6 @@
                 .foreground,
                 .background,
                 .corner {
-                    .heading {
-                        font-size: 10px;
-                        font-weight: 500;
-                        text-transform: uppercase;
-                        color: $silverGrey;
-                        margin-bottom: 5px;
-                    }
-
                     .custom-picker {
                         min-width: 80px;
                         height: 30px;
@@ -119,6 +111,75 @@
                             opacity: 0;
                             visibility: hidden;
                             position: absolute;
+                        }
+                    }
+                }
+            }
+        }
+
+        .type {
+            .types-wrapper {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-bottom: 10px;
+
+                .custom-dropdown {
+                    position: relative;
+                    width: max-content;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    padding: 0 15px;
+                    font-size: 12px;
+                    text-transform: capitalize;
+                    background-color: $white;
+                    cursor: pointer;
+
+
+                    &:hover {
+                        .options {
+                            display: flex;
+                        }
+                    }
+
+                    &:hover i {
+                        @include transitionAnimation;
+                        transform: rotate(180deg);
+                    }
+
+                    .options {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 150px;
+                        display: none;
+                        flex-direction: column;
+                        background-color: $white2;
+                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+                        z-index: 1;
+
+
+                        .option {
+                            padding: 10px 15px;
+                            font-size: 12px;
+                            font-weight: 500;
+                            text-transform: capitalize;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: $white;
+                                @include transitionAnimation;
+
+                            }
+
+                            &.active {
+                                color: $white2;
+                                background-color: $violet;
+                                @include transitionAnimation;
+                            }
                         }
                     }
                 }
