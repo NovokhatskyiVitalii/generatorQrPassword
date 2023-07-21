@@ -7,7 +7,11 @@
 
     @media (max-width: 768px) {
         width: 100%;
+        margin: 0 auto;
+        align-self: center;
+        justify-content: center;
         margin-top: 30px;
+
     }
 
     .generate-btn {
@@ -40,8 +44,8 @@
             height: 200px;
 
             @media (max-width: 768px) {
-                width: 15px;
-                height: 15px;
+                width: 150px;
+                height: 150px;
             }
         }
     }

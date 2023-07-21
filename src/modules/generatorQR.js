@@ -1,3 +1,5 @@
+import qrCode from "./qr-code";
+
 const customPicker = document.querySelectorAll(".custom-picker");
 const colorPicker = document.querySelectorAll(".color-picker");
 const customDropDown = document.querySelectorAll(".custom-dropdown");
@@ -5,6 +7,32 @@ const uploadElem = document.querySelector(".upload-img");
 const uploadImgInput = document.querySelector("#upload-img-input");
 const range = document.querySelector(".custom-slider input");
 const toolTip = document.querySelector(".custom-slider span");
+
+const generateBtn = document.querySelector(".generate-btn");
+const container = document.querySelector(".qr-code-img");
+
+const width = document.getElementById("size"),
+  height = document.getElementById("size"),
+  data = document.getElementById("text"),
+  foregroundColor = document.getElementById("fg-color"),
+  backgroundColor = document.getElementById("bg-color"),
+  cornerColor = document.getElementById("corner-color"),
+  imageRadios = document.querySelectorAll('input[name="logo"]'),
+  dotsStyle = document.getElementById("dots-style"),
+  cornerSquaresStyle = document.getElementById("corner-squares-style"),
+  cornerDotsStyle = document.getElementById("corner-dots-style");
+
+//generate code when any value change
+width.addEventListener("change", generateQRCode);
+height.addEventListener("change", generateQRCode);
+data.addEventListener("input", generateQRCode);
+foregroundColor.addEventListener("change", generateQRCode);
+backgroundColor.addEventListener("change", generateQRCode);
+cornerColor.addEventListener("change", generateQRCode);
+generateBtn.addEventListener("click", generateQRCode);
+imageRadios.forEach((item) => {
+  item.addEventListener("change", generateQRCode);
+});
 
 customPicker.forEach((item) => {
   item.addEventListener("click", () => {
@@ -70,3 +98,40 @@ function setValue() {
 
 document.addEventListener("DOMContentLoaded", setValue);
 range.addEventListener("input", setValue);
+
+//function to generate QR
+function generateQRCode() {
+  let imageRadio = document.querySelector('input[name="logo"]:checked');
+  let image = document.getElementById(imageRadio.value);
+  const qr = new qrCode({
+    width: width.value,
+    height: height.value,
+    type: "canvas",
+    data: data.value,
+    image: image.src,
+    imageOptions: {
+      saveAsBlob: true,
+      crossOrigin: "anonymous",
+      margin: 2,
+    },
+    dotsOptions: {
+      color: foregroundColor.value,
+      type: dotsStyle.innerHTML,
+    },
+    backgroundOptions: {
+      color: backgroundColor.value,
+    },
+    cornersSquareOptions: {
+      color: cornerColor.value,
+      type: cornerSquaresStyle.innerHTML,
+    },
+    cornersDotOptions: {
+      color: cornerColor.value,
+      type: cornerDotsStyle.innerHTML,
+    },
+  });
+  container.innerHTML = "";
+  qr.append(container);
+}
+
+generateQRCode();
