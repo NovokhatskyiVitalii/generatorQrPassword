@@ -23,15 +23,15 @@ const width = document.getElementById("size"),
   cornerDotsStyle = document.getElementById("corner-dots-style");
 
 //generate code when any value change
-width.addEventListener("change", generateQRCode);
-height.addEventListener("change", generateQRCode);
-data.addEventListener("input", generateQRCode);
-foregroundColor.addEventListener("change", generateQRCode);
-backgroundColor.addEventListener("change", generateQRCode);
-cornerColor.addEventListener("change", generateQRCode);
-generateBtn.addEventListener("click", generateQRCode);
+width.addEventListener("change", generateQrCode);
+height.addEventListener("change", generateQrCode);
+data.addEventListener("input", generateQrCode);
+foregroundColor.addEventListener("change", generateQrCode);
+backgroundColor.addEventListener("change", generateQrCode);
+cornerColor.addEventListener("change", generateQrCode);
+generateBtn.addEventListener("click", generateQrCode);
 imageRadios.forEach((item) => {
-  item.addEventListener("change", generateQRCode);
+  item.addEventListener("change", generateQrCode);
 });
 
 customPicker.forEach((item) => {
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", setValue);
 range.addEventListener("input", setValue);
 
 //function to generate QR
-function generateQRCode() {
+function generateQrCode() {
   let imageRadio = document.querySelector('input[name="logo"]:checked');
   let image = document.getElementById(imageRadio.value);
   const qr = new qrCode({
@@ -134,4 +134,4 @@ function generateQRCode() {
   qr.append(container);
 }
 
-generateQRCode();
+generateQrCode();
