@@ -1,3 +1,15 @@
 @mixin transitionAnimation {
     transition: all .3s;
 }
+
+@mixin button {
+    padding: 14px 60px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: $white2;
+    background-color: $violet;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+}

@@ -1,0 +1,85 @@
+.right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .generate-btn {
+        @include button;
+
+        &:hover {
+            @include transitionAnimation;
+            background-color: $silverGrey;
+        }
+
+        &:active {
+            @include transitionAnimation;
+            background-color: $violet;
+        }
+    }
+
+    .qr-code {
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 768px) {
+            margin-top: 20px;
+        }
+
+        canvas {
+            width: 200px;
+            height: 200px;
+
+            @media (max-width: 768px) {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .download {
+        margin-top: 10px;
+
+        p {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+            color: $violet;
+            text-transform: uppercase;
+        }
+
+        .download-btns {
+            margin-top: 5px;
+            display: flex;
+            gap: 10px;
+
+            .download-btn {
+                @include button;
+                padding: 10px 10px;
+                border: 2px solid $violet;
+                color: $violet;
+                background-color: transparent;
+
+                &:hover {
+                    background-color: $violet;
+                    color: $white2;
+                    @include transitionAnimation;
+                }
+
+                &:active {
+                    background-color: $silverGrey;
+                }
+            }
+        }
+    }
+}
