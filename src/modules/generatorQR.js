@@ -3,6 +3,8 @@ const colorPicker = document.querySelectorAll(".color-picker");
 const customDropDown = document.querySelectorAll(".custom-dropdown");
 const uploadElem = document.querySelector(".upload-img");
 const uploadImgInput = document.querySelector("#upload-img-input");
+const range = document.querySelector(".custom-slider input");
+const toolTip = document.querySelector(".custom-slider span");
 
 customPicker.forEach((item) => {
   item.addEventListener("click", () => {
@@ -55,3 +57,16 @@ uploadImgInput.addEventListener("change", (e) => {
     img.src = reader.result;
   };
 });
+
+//move toolTip with the slider
+function setValue() {
+  const newValue = Number(
+    ((range.value - range.min) * 100) / (range.max - range.min)
+  );
+  const newPosition = 16 - newValue * 0.32;
+  toolTip.innerHTML = range.value + " x " + range.value;
+  toolTip.style.left = `calc(${newValue}% + (${newPosition}px)`;
+}
+
+document.addEventListener("DOMContentLoaded", setValue);
+range.addEventListener("input", setValue);
