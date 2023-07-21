@@ -12,105 +12,149 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="left">
-            <form action="#">
-                <div class="text">
-                    <label for="text">
-                        <i class="fa-solid fa-keyboard"></i>
-                        Enter your text or URL
-                    </label>
-                    <input type="text" id="text" placeholder=" Enter your text or URL">
-                </div>
+    <header class="header"></header>
 
-                <div class="color">
-                    <label for="">
-                        <i class="fa-solid fa-paint-brush"></i>
-                        Color
-                    </label>
-
-                    <div class="colors-wrapper">
-                        <div class="foreground">
-                            <h5 class="heading">foreground</h5>
-                            <div class="custom-picker">
-                                <span></span>
-                                <input type="text" value="#5a4ca1" disabled />
-                                <input type="color" class="color-picker" id="fg-color" value="#5a4ca1" />
-                            </div>
-                        </div>
-                        <div class="background">
-                            <h5 class="heading">background</h5>
-                            <div class="custom-picker">
-                                <span></span>
-                                <input type="text" value="#ffffff" disabled />
-                                <input type="color" class="color-picker" id="bg-color" value="#ffffff" />
-                            </div>
-                        </div>
-                        <div class="corner">
-                            <h5 class="heading">corner</h5>
-                            <div class="custom-picker">
-                                <span></span>
-                                <input type="text" value="#000000" disabled />
-                                <input type="color" class="color-picker" id="corner-color" value="#000000" />
-                            </div>
-                        </div>
+    <main class="main">
+        <div class="container">
+            <div class="left">
+                <form action="#">
+                    <div class="text">
+                        <label for="text">
+                            <i class="fa-solid fa-keyboard"></i>
+                            Enter your text or URL
+                        </label>
+                        <input type="text" id="text" placeholder=" Enter your text or URL">
                     </div>
-                </div>
 
-                <div class="type">
-                    <label for="">
-                        <i class="fa-solid fa-qrcode"></i>
-                        style
-                    </label>
+                    <div class="color">
+                        <label for="">
+                            <i class="fa-solid fa-paint-brush"></i>
+                            Color
+                        </label>
 
-                    <div class="types-wrapper">
-                        <div class="dots">
-                            <span class="heading">dots</span>
-                            <div class="custom-dropdown">
-                                <span class="selected" id="dots-style">square</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <div class="options">
-                                    <span class="option">dots</span>
-                                    <span class="option active">square</span>
-                                    <span class="option">rounded</span>
-                                    <span class="option">extra-rounded</span>
-                                    <span class="option">classy</span>
-                                    <span class="option">classy-rounded</span>
-
+                        <div class="colors-wrapper">
+                            <div class="foreground">
+                                <h5 class="heading">foreground</h5>
+                                <div class="custom-picker">
+                                    <span></span>
+                                    <input type="text" value="#5a4ca1" disabled />
+                                    <input type="color" class="color-picker" id="fg-color" value="#5a4ca1" />
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="corner-squares">
-                            <span class="heading">corner square</span>
-                            <div class="custom-dropdown">
-                                <span class="selected" id="corner-squares-style">square</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <div class="options">
-                                    <span class="option">dots</span>
-                                    <span class="option active">square</span>
-                                    <span class="option">extra-rounded</span>
+                            <div class="background">
+                                <h5 class="heading">background</h5>
+                                <div class="custom-picker">
+                                    <span></span>
+                                    <input type="text" value="#ffffff" disabled />
+                                    <input type="color" class="color-picker" id="bg-color" value="#ffffff" />
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="corner-dots">
-                            <span class="heading">corner dots</span>
-                            <div class="custom-dropdown">
-                                <span class="selected" id="corner-dots-style">square</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <div class="options">
-                                    <span class="option">dots</span>
-                                    <span class="option active">square</span>
+                            <div class="corner">
+                                <h5 class="heading">corner</h5>
+                                <div class="custom-picker">
+                                    <span></span>
+                                    <input type="text" value="#000000" disabled />
+                                    <input type="color" class="color-picker" id="corner-color" value="#000000" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+
+                    <div class="type">
+                        <label for="">
+                            <i class="fa-solid fa-qrcode"></i>
+                            style
+                        </label>
+
+                        <div class="types-wrapper">
+                            <div class="dots">
+                                <span class="heading">dots</span>
+                                <div class="custom-dropdown">
+                                    <span class="selected" id="dots-style">square</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    <div class="options">
+                                        <span class="option">dots</span>
+                                        <span class="option active">square</span>
+                                        <span class="option">rounded</span>
+                                        <span class="option">extra-rounded</span>
+                                        <span class="option">classy</span>
+                                        <span class="option">classy-rounded</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="corner-squares">
+                                <span class="heading">corner square</span>
+                                <div class="custom-dropdown">
+                                    <span class="selected" id="corner-squares-style">square</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    <div class="options">
+                                        <span class="option">dots</span>
+                                        <span class="option active">square</span>
+                                        <span class="option">extra-rounded</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="corner-dots">
+                                <span class="heading">corner dots</span>
+                                <div class="custom-dropdown">
+                                    <span class="selected" id="corner-dots-style">square</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    <div class="options">
+                                        <span class="option">dots</span>
+                                        <span class="option active">square</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="logos">
+                        <label>
+                            <i class="fa-solid fa-image"></i>
+                            logo
+                        </label>
+                        <div class="logos-wrapper">
+                            <label class="logo">
+                                <input type="radio" name="logo" value="fb" checked>
+                                <img src="/src/img/logos/facebook.png" alt="facebook" id="fb">
+                            </label>
+                            <label class="logo">
+                                <input type="radio" name="logo" value="tw">
+                                <img src="/src/img/logos/twitter.png" alt="twitter" id="tw">
+                            </label>
+                            <label class="logo">
+                                <input type="radio" name="logo" value="in">
+                                <img src="/src/img/logos/linkedin.png" alt="linkedin" id="in">
+                            </label>
+                            <label class="logo">
+                                <input type="radio" name="logo" value="yt">
+                                <img src="/src/img/logos/youtube.png" alt="youtube" id="yt">
+                            </label>
+
+                            <label class="logo">
+                                <input type="radio" name="logo" value="gh">
+                                <img src="/src/img/logos/github-logo.png" alt="facebook" id="gh">
+                            </label>
+                            <label class="logo">
+                                <!-- custom upload button -->
+                                <input type="radio" name="logo" value="ct">
+                                <div class="upload-img">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <input type="file" id="upload-img-input">
+                                    <img alt="" id="ct">
+                                </div>
+                            </label>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="right"></div>
         </div>
-        <div class="right"></div>
-    </div>
+    </main>
     <script type="module" src="dist/bundle.js"></script>
 </body>
 

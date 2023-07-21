@@ -1,6 +1,8 @@
 const customPicker = document.querySelectorAll(".custom-picker");
 const colorPicker = document.querySelectorAll(".color-picker");
 const customDropDown = document.querySelectorAll(".custom-dropdown");
+const uploadElem = document.querySelector(".upload-img");
+const uploadImgInput = document.querySelector("#upload-img-input");
 
 customPicker.forEach((item) => {
   item.addEventListener("click", () => {
@@ -35,4 +37,21 @@ customDropDown.forEach((item) => {
       item.querySelector(".selected").innerHTML = option.innerHTML;
     });
   });
+});
+
+uploadElem.addEventListener("click", () => {
+  uploadImgInput.click();
+});
+
+uploadImgInput.addEventListener("change", (e) => {
+  //on change get the file content
+  const file = e.target.files[0];
+  //reader the file with FileReader
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+    //img is next to file input select it and change src
+    let img = uploadImgInput.nextSibling.nextSibling;
+    img.src = reader.result;
+  };
 });

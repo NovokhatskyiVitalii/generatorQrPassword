@@ -7,6 +7,9 @@
 @import './base/reset';
 @import './base/typography';
 
+//layout
+@import './layout/header';
+
 //components
 ///for generate QR code///
 @import './components/left';
