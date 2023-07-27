@@ -841,6 +841,8 @@
               }
               function defineProperty() {
                 var credits = document.createElement("div");
+                credits.innerHTML =
+                  "A Project By <a href='https://github.com/NovokhatskyiVitalii' target=_blank>NovokhatskyiVitalii</a>";
                 credits.style.position = "absolute";
                 credits.style.bottom = "0";
                 credits.style.right = "0";

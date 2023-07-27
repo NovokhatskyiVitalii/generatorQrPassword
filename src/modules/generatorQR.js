@@ -65,6 +65,7 @@ customDropDown.forEach((item) => {
       option.classList.add("active");
       //update selected text
       item.querySelector(".selected").innerHTML = option.innerHTML;
+      generateQrCode();
     });
   });
 });
@@ -83,6 +84,7 @@ uploadImgInput.addEventListener("change", (e) => {
     //img is next to file input select it and change src
     let img = uploadImgInput.nextSibling.nextSibling;
     img.src = reader.result;
+    generateQrCode();
   };
 });
 
@@ -112,7 +114,7 @@ function generateQrCode() {
     imageOptions: {
       saveAsBlob: true,
       crossOrigin: "anonymous",
-      margin: 2,
+      margin: 5,
     },
     dotsOptions: {
       color: foregroundColor.value,
@@ -135,3 +137,29 @@ function generateQrCode() {
 }
 
 generateQrCode();
+
+//download functionality
+const downloadPng = document.querySelector("#download-png"),
+  downloadJpg = document.querySelector("#download-jpg"),
+  downloadSvg = document.querySelector("#download-svg");
+
+downloadPng.addEventListener("click", () => {
+  qrCode.download({
+    name: "qrCode-" + Date.now(),
+    extension: "png",
+  });
+});
+
+downloadJpg.addEventListener("click", () => {
+  qrCode.download({
+    name: "qrCode-" + Date.now(),
+    extension: "jpg",
+  });
+});
+
+downloadSvg.addEventListener("click", () => {
+  qrCode.download({
+    name: "qrCode-" + Date.now(),
+    extension: "svg",
+  });
+});
