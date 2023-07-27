@@ -1,4 +1,4 @@
-import qrCode from "./qr-code";
+import QrCode from "./qr-code";
 
 const customPicker = document.querySelectorAll(".custom-picker");
 const colorPicker = document.querySelectorAll(".color-picker");
@@ -11,6 +11,10 @@ const toolTip = document.querySelector(".custom-slider span");
 const generateBtn = document.querySelector(".generate-btn");
 const container = document.querySelector(".qr-code-img");
 
+const downloadPng = document.querySelector("#download-png"),
+  downloadJpg = document.querySelector("#download-jpg"),
+  downloadSvg = document.querySelector("#download-svg");
+
 const width = document.getElementById("size"),
   height = document.getElementById("size"),
   data = document.getElementById("text"),
@@ -21,6 +25,9 @@ const width = document.getElementById("size"),
   dotsStyle = document.getElementById("dots-style"),
   cornerSquaresStyle = document.getElementById("corner-squares-style"),
   cornerDotsStyle = document.getElementById("corner-dots-style");
+
+const navItems = document.querySelectorAll("nav div"),
+  containers = document.querySelectorAll(".container");
 
 //generate code when any value change
 width.addEventListener("change", generateQrCode);
@@ -105,7 +112,7 @@ range.addEventListener("input", setValue);
 function generateQrCode() {
   let imageRadio = document.querySelector('input[name="logo"]:checked');
   let image = document.getElementById(imageRadio.value);
-  const qr = new qrCode({
+  const qr = new QrCode({
     width: width.value,
     height: height.value,
     type: "canvas",
@@ -132,6 +139,7 @@ function generateQrCode() {
       type: cornerDotsStyle.innerHTML,
     },
   });
+  window.qr = qr;
   container.innerHTML = "";
   qr.append(container);
 }
@@ -139,27 +147,41 @@ function generateQrCode() {
 generateQrCode();
 
 //download functionality
-const downloadPng = document.querySelector("#download-png"),
-  downloadJpg = document.querySelector("#download-jpg"),
-  downloadSvg = document.querySelector("#download-svg");
-
 downloadPng.addEventListener("click", () => {
-  qrCode.download({
+  window.qr.download({
     name: "qrCode-" + Date.now(),
     extension: "png",
   });
 });
 
 downloadJpg.addEventListener("click", () => {
-  qrCode.download({
+  window.qr.download({
     name: "qrCode-" + Date.now(),
     extension: "jpg",
   });
 });
 
 downloadSvg.addEventListener("click", () => {
-  qrCode.download({
+  window.qr.download({
     name: "qrCode-" + Date.now(),
     extension: "svg",
+  });
+});
+
+//add event listener on all nav items
+navItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    //click nav item remove active from other
+    navItems.forEach((item) => {
+      item.classList.remove("active");
+    });
+    //add active to clicked
+    item.classList.add("active");
+    //show the relative container
+    containers.forEach((item) => {
+      item.classList.remove("active");
+    });
+    //get id from clicked nav item add -container then select that container and add active
+    document.querySelector(`#${item.id}-container`).classList.add("active");
   });
 });
