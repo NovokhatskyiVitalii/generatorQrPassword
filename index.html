@@ -21,7 +21,7 @@
                 <div id="generator">Generator</div>
                 <div class="active" id="scanner">Scanner</div>
             </nav>
-            <div class="container generator active" id="generator-container">
+            <div class="container generator " id="generator-container">
                 <div class="left">
                     <form action="#">
                         <div class="text">
@@ -195,14 +195,33 @@
                     </div>
                 </div>
             </div>
-            <div class="container scanner" id="scanner-container">
+            <div class="container scanner active" id="scanner-container">
                 <div class="left">
                     <p class="heading">QR Code</p>
-                    <label for="file" class=""></label>
+                    <label for="file" class="dropzone">
+                        <div class="content show">
+                            <span class="text">Drag QR Code here or</span>
+                            <button class="btn">browse</button>
+                            <input type="file" id="file" hidden>
+                        </div>
+                        <img alt="" id="preview">
+                    </label>
                 </div>
                 <div class="right">
-                    <p class="heading">QR Code</p>
-                    <label for=""></label>
+                    <div class="result">
+                        <p class="heading">Result</p>
+                        <textarea id="result" disabled></textarea>
+                        <div class="btns" id="result-btns">
+                            <button class="btn" id="copy">
+                                <i class="fa-solid fa-copy"></i>
+                                copy
+                            </button>
+                            <button class="btn" id="open">
+                                <i class="fa-solid fa-external-link"></i>
+                                open
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

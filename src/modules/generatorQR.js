@@ -29,6 +29,13 @@ const width = document.getElementById("size"),
 const navItems = document.querySelectorAll("nav div"),
   containers = document.querySelectorAll(".container");
 
+const dropZone = document.querySelector(".dropzone"),
+  dropZoneInput = document.querySelector("#file"),
+  dropZoneText = document.querySelector(".dropzone .text"),
+  resultTextArea = document.querySelector("#result"),
+  copyBtn = document.querySelector("#copy"),
+  openBtn = document.querySelector("#open");
+
 //generate code when any value change
 width.addEventListener("change", generateQrCode);
 height.addEventListener("change", generateQrCode);
@@ -184,4 +191,156 @@ navItems.forEach((item) => {
     //get id from clicked nav item add -container then select that container and add active
     document.querySelector(`#${item.id}-container`).classList.add("active");
   });
+});
+
+//functionality of drag and drop
+//when a file is hovered on drop zone
+const handleDragOver = (e) => {
+  //prevent default
+  e.preventDefault();
+  e.stopPropagation();
+  //add highlight class to hight dropzone
+  dropZone.classList.add("highlight");
+};
+
+//highlight class added lets remove on drag leave
+const handleDragLeave = (e) => {
+  //prevent default
+  e.preventDefault();
+  e.stopPropagation();
+  //add highlight class to hight dropzone
+  dropZone.classList.remove("highlight");
+};
+
+const handleDrop = (e) => {
+  //prevent default
+  e.preventDefault();
+  e.stopPropagation();
+  //get the file
+  const file = e.dataTransfer.files[0];
+  //add file tip input file
+  dropZoneInput.files = e.dataTransfer.files;
+  //if file exists
+  if (dropZoneInput.files.length) {
+    //if file is empty do nothing
+    if (!file) return;
+    //if file selected check its image or other file
+    if (!checkFile(file)) return;
+    //if file valid fetch result
+    let formData = new FormData();
+    formData.append("file", file);
+    fetchRequest(file, formData);
+  }
+};
+
+//functionality to check file
+function checkFile() {
+  const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+  //if file is one the allowed
+  if (validTypes.indexOf(file.type) === -1) {
+    //if wrong file change text in drop zone
+    dropZoneText.innerHTML = "please select an image file";
+    return false;
+  }
+  //if valid file return true
+  return true;
+}
+
+//use an api to get qr result
+function fetchRequest(file, formData) {
+  dropZone.innerHTML = "Scanning QR Code ...";
+  fetch("http://api.qrserver.com/v1/read-qr-code/", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      //this will be decoded data
+      result = result[0].symbol[0].data;
+      dropZoneText.innerHTML = result
+        ? "Upload QR Code to Scan"
+        : "Couldn`t scan QR Code";
+      if (!result) {
+        return;
+      }
+      resultTextArea.innerHTML = result;
+      //show buttons only when there is some text in textarea
+      document.querySelector("#result-btns").classList.add("active");
+      if (!isValidUrl(result)) {
+        openBtn.style.display = "none";
+      } else {
+        openBtn.style.display = "block";
+      }
+      //show image in dropzone
+      updateThumbnail(file);
+    })
+    .catch(() => {
+      reset();
+      dropZoneText.innerHTML = "Couldn`t scan QR Code";
+    });
+}
+
+//reset function
+function reset() {
+  content = dropZone.querySelector(".content");
+  img = dropZone.querySelector("img");
+  img.src = "";
+  img.classList.remove("show");
+  content.classList.add("show");
+  resultTextArea.innerText = "";
+}
+
+//update thumbnail
+function updateThumbnail() {
+  let reader = new FileReader();
+  reader.readAsDataURL(img);
+  reader.onload = () => {
+    content = dropZone.querySelector(".content");
+    img = dropZone.querySelector("img");
+    img.src = reader.result;
+    img.classList.add("show");
+    content.classList.remove("show");
+  };
+}
+
+function isValidUrl(urlString) {
+  var urlPattern = new RegExp(
+    "^(https?:\\/\\/)?" + // validate protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // validate fragment locator
+  return !!urlPattern.test(urlString);
+}
+
+//add event listener on drag
+dropZone.addEventListener("dragover", handleDragOver);
+//remove event listener on drag
+dropZone.addEventListener("dragleave", handleDragLeave);
+//add drop eventlistener
+dropZone.addEventListener("drop", handleDrop);
+dropZoneInput.addEventListener("change", (e) => {
+  if (dropzoneInput.files.length) {
+    let file = e.target.files[0];
+    if (!file) return;
+    if (!checkFile(file)) {
+      return;
+    }
+    let formData = new FormData();
+    formData.append("file", file);
+    fetchRequest(file, formData);
+  }
+});
+
+copyBtn.addEventListener("click", () => {
+  text = resultTextarea.textContent;
+  navigator.clipboard.writeText(text);
+});
+
+openBtn.addEventListener("click", () => {
+  text = resultTextarea.textContent;
+  window.open(text, "_blank");
 });

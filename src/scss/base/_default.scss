@@ -2,6 +2,16 @@ body {
     position: relative;
     min-height: 100vh;
     background-color: $white;
+
+    @media (max-width: 768px) {
+        align-items: flex-start;
+    }
+}
+
+nav {
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 .main {

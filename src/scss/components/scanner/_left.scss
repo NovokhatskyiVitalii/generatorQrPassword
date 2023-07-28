@@ -1,0 +1,59 @@
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .dropzone {
+        display: block;
+        width: 300px;
+        height: 300px;
+        cursor: pointer;
+        border: 2px dashed $silverGrey;
+
+        &:hover,
+        &.highlight {
+            border-color: $violet;
+            @include transitionAnimation;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .content {
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+
+            &.show {
+                display: flex !important;
+            }
+
+            .text {
+                padding: 0 20px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .btn {
+                @include button;
+
+                &:hover {
+                    background-color: $silverGrey;
+                    color: $white2;
+                    @include transitionAnimation;
+                }
+
+                &:active {
+                    background-color: $violet;
+                }
+            }
+        }
+    }
+}
