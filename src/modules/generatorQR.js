@@ -177,7 +177,6 @@ function fetchRequest(file, formData) {
     .catch(() => {
       reset();
       dropZoneText.innerText = "Couldn't scan QR Code";
-      updateThumbnail(file);
     });
 }
 
