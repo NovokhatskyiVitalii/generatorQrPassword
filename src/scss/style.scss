@@ -12,9 +12,9 @@
 
 //components
 ///for generate QR code///
-@import './components/generator/left';
-@import './components/generator/right';
+@import './components/qr/left';
+@import './components/qr/right';
 
-///for scanner QR code///
-@import './components/scanner/left';
-@import './components/scanner/right';
+///for generator password///
+// @import './components/password/left';
+// @import './components/password/right';

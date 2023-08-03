@@ -29,14 +29,6 @@ const downloadPng = document.querySelector("#download-png"),
   downloadJpg = document.querySelector("#download-jpg"),
   downloadSvg = document.querySelector("#download-svg");
 
-const dropZone = document.querySelector(".dropzone"),
-  dropZoneInput = document.querySelector("#file"),
-  dropZoneText = document.querySelector(".dropzone .text");
-
-const resultTextArea = document.querySelector("#result"),
-  copyBtn = document.querySelector("#copy"),
-  openBtn = document.querySelector("#open");
-
 const range = document.querySelector(".custom-slider input"),
   tooltip = document.querySelector(".custom-slider span");
 
@@ -51,47 +43,6 @@ function setValue() {
   tooltip.innerHTML = range.value + " x " + range.value;
   tooltip.style.left = `calc(${newValue}% + (${newPosition}px))`;
 }
-
-//functionality of drag and drop
-//when a file is hovered on drop zone
-const handleDragOver = (e) => {
-  //prevent default
-  e.preventDefault();
-  e.stopPropagation();
-  //add highlight class to hight dropzone
-  dropZone.classList.add("highlight");
-};
-
-const handleDragLeave = (e) => {
-  //prevent default
-  e.preventDefault();
-  e.stopPropagation();
-  //add highlight class to hight dropzone
-  dropZone.classList.remove("highlight");
-};
-
-const handleDrop = (e) => {
-  //prevent default
-  e.preventDefault();
-  e.stopPropagation();
-  //get the file
-  const file = e.dataTransfer.files[0];
-  //add file tip input file
-  dropZoneInput.files = e.dataTransfer.files;
-  //if file exists
-  if (dropZoneInput.files.length) {
-    //if file is empty do nothing
-    if (!file) return;
-    //if file selected check its image or other file
-    if (!checkFile(file)) {
-      return;
-    }
-    //if file valid fetch result
-    let formData = new FormData();
-    formData.append("file", file);
-    fetchRequest(file, formData);
-  }
-};
 
 //function to generate QR
 function generateQRCode() {
@@ -130,92 +81,6 @@ function generateQRCode() {
 }
 
 generateQRCode();
-
-//functionality to check file
-function checkFile(file) {
-  const validTypes = ["image/jpeg", "image/jpg", "image/png"];
-  //if file is one the allowed
-  if (validTypes.indexOf(file.type) === -1) {
-    //if wrong file change text in drop zone
-    dropZone.querySelector(".text").innerHTML =
-      "Please select an image file (jpg or png)";
-    return false;
-  }
-  //if valid file return true
-  return true;
-}
-
-//use an api to get qr result
-function fetchRequest(file, formData) {
-  dropZoneText.innerText = "Scanning QR Code...";
-  fetch("http://api.qrserver.com/v1/read-qr-code/", {
-    method: "POST",
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      result = result[0].symbol[0].data;
-      //this will be decoded data
-      dropZoneText.innerText = result
-        ? "Upload QR Code to Scan"
-        : "Couldn't scan QR Code";
-      if (!result) {
-        reset();
-        return;
-      }
-      resultTextArea.innerText = result;
-      //show buttons only when there is some text in textarea
-      document.querySelector("#result-btns").classList.add("active");
-      if (!isValidUrl(result)) {
-        openBtn.style.display = "none";
-      } else {
-        openBtn.style.display = "block";
-      }
-      //show image in dropzone
-      updateThumbnail(file);
-    })
-    .catch(() => {
-      reset();
-      dropZoneText.innerText = "Couldn't scan QR Code";
-    });
-}
-
-//update thumbnail
-function updateThumbnail(img) {
-  let reader = new FileReader();
-  reader.readAsDataURL(img);
-  reader.onload = () => {
-    let content = dropZone.querySelector(".content");
-    let img = dropZone.querySelector("img");
-    img.src = reader.result;
-    img.classList.add("show");
-    content.classList.remove("show");
-  };
-}
-
-//function reset
-function reset() {
-  let content = dropZone.querySelector(".content");
-  let img = dropZone.querySelector("img");
-  img.src = "";
-  img.classList.remove("show");
-  content.classList.add("show");
-  resultTextArea.innerText = "";
-}
-
-//function valid URL
-function isValidUrl(urlString) {
-  var urlPattern = new RegExp(
-    "^(https?:\\/\\/)?" + // validate protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // validate fragment locator
-  return !!urlPattern.test(urlString);
-}
 
 //add event listener on all nav items
 navItems.forEach((item) => {
@@ -325,34 +190,4 @@ downloadSvg.addEventListener("click", () => {
     name: "qrCode-" + Date.now(),
     extension: "svg",
   });
-});
-
-//add event listener on drag
-dropZone.addEventListener("dragover", handleDragOver);
-//remove event listener on drag
-dropZone.addEventListener("dragleave", handleDragLeave);
-//add drop eventlistener
-dropZone.addEventListener("drop", handleDrop);
-
-dropZoneInput.addEventListener("change", (e) => {
-  if (dropZoneInput.files.length) {
-    let file = e.target.files[0];
-    if (!file) return;
-    if (!checkFile(file)) {
-      return;
-    }
-    let formData = new FormData();
-    formData.append("file", file);
-    fetchRequest(file, formData);
-  }
-});
-
-copyBtn.addEventListener("click", () => {
-  text = resultTextArea.textContent;
-  navigator.clipboard.writeText(text);
-});
-
-openBtn.addEventListener("click", () => {
-  text = resultTextArea.textContent;
-  window.open(text, "_blank");
 });
