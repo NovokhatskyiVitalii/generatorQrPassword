@@ -15,6 +15,16 @@
     <header class="header">
         <img src="./src/img/svg/favicon.svg" alt="logo-header">
         <h1>QR and password generator</h1>
+        <div class="mode">
+            <label for="dark-mode-btn" class="toggle">
+                <div class="toggle-track">
+                    <input type="checkbox" id="dark-mode-btn" class="toggle-checkbox">
+                    <span class="toggle-thumb"></span>
+                    <img src="./src/img/sun.png" alt="sun">
+                    <img src="./src/img/moon.png" alt="moon">
+                </div>
+            </label>
+        </div>
     </header>
 
     <main class="main">
@@ -23,7 +33,7 @@
                 <div class="active" id="generator-qr">Generator QR</div>
                 <div id="generator-password">Generator Password</div>
             </nav>
-            <div class="container generator-qr active" id="generator-qr-container">
+            <div class="container generator-qr " id="generator-qr-container">
                 <div class="left">
                     <form action="#">
                         <div class="text">
@@ -87,7 +97,6 @@
                                             <span class="option">extra-rounded</span>
                                             <span class="option">classy</span>
                                             <span class="option">classy-rounded</span>
-
                                         </div>
                                     </div>
                                 </div>
@@ -197,7 +206,50 @@
                     </div>
                 </div>
             </div>
-            <div class="container generator-password" id="generator-password-container">
+            <div class="container generator-password active" id="generator-password-container">
+                <h3 class="heading">Generate a secure password</h3>
+                <section class="display">
+                    <div class="wrapper-password">
+                        <input type="text" id="password-display">
+                        <img src="./src/img/copy.png" alt="copy">
+                    </div>
+                </section>
+                <section class="customize">
+                    <h1 class="heading">Customize your password</h1>
+                    <div class="wrapper-customize">
+                        <div class="left-side">
+                            <div class="customize-item">
+                                <label for="lowercase" class="checkbox-container">
+                                    <input type="checkbox" id="lowercase">
+                                    <div class="checkmark"></div>
+                                </label>
+                                <label for="lowercase" class="label-text">lowercase</label>
+                            </div>
+                            <div class="customize-item">
+                                <label for="uppercase" class="checkbox-container">
+                                    <input type="checkbox" id="uppercase">
+                                    <div class="checkmark"></div>
+                                </label>
+                                <label for="uppercase" class="label-text">uppercase</label>
+                            </div>
+                            <div class="customize-item">
+                                <label for="numbers" class="checkbox-container">
+                                    <input type="checkbox" id="numbers">
+                                    <div class="checkmark"></div>
+                                </label>
+                                <label for="numbers" class="label-text">numbers</label>
+                            </div>
+                            <div class="customize-item">
+                                <label for="symbols" class="checkbox-container">
+                                    <input type="checkbox" id="symbols">
+                                    <div class="checkmark"></div>
+                                </label>
+                                <label for="symbols" class="label-text">symbols</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
 
             </div>
         </div>

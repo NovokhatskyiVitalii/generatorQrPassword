@@ -11,10 +11,11 @@
 @import './layout/header';
 
 //components
+@import "./components/toggleTheme";
+
 ///for generate QR code///
 @import './components/qr/left';
 @import './components/qr/right';
 
 ///for generator password///
-// @import './components/password/left';
-// @import './components/password/right';
+@import './components/password/password';
