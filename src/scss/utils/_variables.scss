@@ -5,3 +5,12 @@ $white2: #ffffff;
 $silverGrey: #a5a5a5;
 $black: #000000;
 $box-shadow: #ddd;
+
+:root {
+    --violet: #{$violet};
+    --white: #{$white};
+    --white2: #{$white2};
+    --silverGrey: #{$silverGrey};
+    --black: #{$black};
+    --box-shadow: #{$box-shadow};
+}

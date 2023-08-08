@@ -19,12 +19,12 @@
 
         &:hover {
             @include transitionAnimation;
-            background-color: $silverGrey;
+            background-color: var(--silverGrey);
         }
 
         &:active {
             @include transitionAnimation;
-            background-color: $violet;
+            background-color: var(--violet);
         }
     }
 
@@ -58,7 +58,7 @@
             font-size: 12px;
             font-weight: 600;
             margin-top: 10px;
-            color: $violet;
+            color: var(--violet);
             text-transform: uppercase;
         }
 
@@ -70,18 +70,18 @@
             .download-btn {
                 @include button;
                 padding: 10px 10px;
-                border: 2px solid $violet;
-                color: $violet;
+                border: 2px solid var(--violet);
+                color: var(--violet);
                 background-color: transparent;
 
                 &:hover {
-                    background-color: $violet;
-                    color: $white2;
+                    background-color: var(--violet);
+                    color: var(--white2);
                     @include transitionAnimation;
                 }
 
                 &:active {
-                    background-color: $silverGrey;
+                    background-color: var(--silverGray);
                 }
             }
         }
